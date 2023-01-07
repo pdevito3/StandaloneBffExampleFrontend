@@ -19,7 +19,8 @@ function useClaims() {
   return useQuery(
     claimsKeys.claim,
     async () => {
-      return fetchClaims();
+      const delay = new Promise((resolve) => setTimeout(resolve, 550));
+      return Promise.all([fetchClaims(), delay]).then(([claims]) => claims);
     },
     {
       retry: false,
